@@ -1,0 +1,31 @@
+
+
+import System.Environment
+
+main :: IO ()
+main = do 
+            args <- getArgs
+            text <- readFile (args !! 0)
+            print (checkPolicy (lines text))
+
+
+type Policy = ((Int, Int), Char)
+
+
+checkPolicy :: [String] -> (Int, [(Policy, String, Bool)])
+checkPolicy xs = (1, map (\(x, y) -> (x, y, True)) (map parseLine xs))
+
+parseLine :: String -> (Policy, String)
+parseLine s     = (parsePolicy s, "hello")
+
+parsePolicy :: String -> Policy
+parsePolicy s 	= (((parseMin s), (parseMax s)), (parseChar s)) 
+
+parseMin :: String -> Int
+parseMin s 	= (read :: String -> Int) (takeWhile (/= '-') s)
+
+parseMax :: String -> Int
+parseMax s	= (read :: String -> Int) (takeWhile (/= ' ') (dropWhile (/= '-') s))
+
+parseChar :: String -> Char
+parseChar s	= head (dropWhile (/= ' ') s)
