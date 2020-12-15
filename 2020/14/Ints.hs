@@ -32,7 +32,6 @@ runProgram :: RunInst -> Program -> State -> Int
 runProgram _ []           (_   , mem) = foldl (+) 0 mem
 runProgram f (inst:insts) (mask, mem) = runProgram f insts $ f inst (mask, mem)
 
-
 applyInst1 :: RunInst
 applyInst1 (Mask m1) (_, mem)    = (m1, mem)
 applyInst1 (Mem a v) (mask, mem) = (mask, Map.insert a (maskValue mask v) mem)
