@@ -1,5 +1,13 @@
 
 import qualified Data.Map as Map
+import System.Environment
+
+main :: IO ()
+main = do
+            args <- getArgs
+            let n = (read :: String -> Int) $ args !! 0;
+                xs = (read :: String -> [Int]) $ args !! 1 in
+                    print (playGame n xs)
 
 type TurnNumber = Int
 type PreviousTurns = Map.Map Int TurnNumber
@@ -21,9 +29,12 @@ takeTurn (t, prevTurn, prev) = let l = calculateLatest t prevTurn prev in
 playGame :: Int -> [Int] -> Int
 playGame turns xs = (\(_,n,_) -> n) $ applyNTimes (turns - (length xs)) takeTurn $ ((length xs)+1, last xs, initPrev xs)
 
+--applyNTimes :: Int -> (a -> a) -> a -> a
+--applyNTimes 0 _ x = x 
+--applyNTimes n f x = applyNTimes (n-1) f $! f x
+
 applyNTimes :: Int -> (a -> a) -> a -> a
-applyNTimes 0 _ x = x 
-applyNTimes n f x = applyNTimes (n-1) f $! f x
+applyNTimes n f x = (iterate f x) !! n
 
 updateLatest :: Int -> TurnNumber -> PreviousTurns -> PreviousTurns
 updateLatest n t m = Map.insert n t m
