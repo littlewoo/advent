@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 import qualified Data.IntMap as Map
+=======
+import qualified Data.Map as Map
+>>>>>>> 614aeca9286ed3ddedbca2d04fa8a56986a0bcdf
 import System.Environment
 
 main :: IO ()
@@ -34,6 +38,10 @@ playTurn n (t, prevTurn, prev) = let l = calculateLatest t prevTurn prev in
 playGame :: Int -> [Int] -> Int
 --playGame turns xs = (\(_,n,_) -> n) $ applyNTimes (turns - 6) takeTurn $ (7, 5, previous)
 playGame turns _ = playTurn (turns-6) (7,5,previous)
+
+--applyNTimes :: Int -> (a -> a) -> a -> a
+--applyNTimes 0 _ x = x 
+--applyNTimes n f x = applyNTimes (n-1) f $! f x
 
 --applyNTimes :: Int -> (a -> a) -> a -> a
 --applyNTimes 0 _ x = x 
