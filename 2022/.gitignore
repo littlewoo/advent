@@ -1,0 +1,5 @@
+
+*.hi
+*.hs
+*.o
+session.txt
