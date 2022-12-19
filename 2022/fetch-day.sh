@@ -9,5 +9,5 @@ echo 'Fetching puzzle material for year '$YEAR', day '$DAY_NO'.'
 mkdir $DIR
 cp Main.hs $DIR
 curl 'https://adventofcode.com/'$YEAR'/day/'$STRIPPED_DAY'/input' -H 'Cookie: session='$(cat ./session.txt) > $DIR/input
-curl 'https://adventofcode.com/'$YEAR'/day/'$STRIPPED_DAY'' -H 'Cookie: session='$(cat ./session.txt) > $DIR/puzzle1.html
+curl 'https://adventofcode.com/'$YEAR'/day/'$STRIPPED_DAY'' -H 'Cookie: session='$(cat ./session.txt) > $DIR/index.html
 
